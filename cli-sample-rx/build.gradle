@@ -1,0 +1,51 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+    id 'application'
+    id 'com.google.devtools.ksp' version("$kspVersion")
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // VisualFSM base classes
+    implementation "ru.kontur.mobile.visualfsm:visualfsm-core:$visualfsmVersion"
+
+    // VisualFSM RxJava 3 classes
+    implementation "ru.kontur.mobile.visualfsm:visualfsm-rxjava3:$visualfsmVersion"
+
+    // Code generation
+    ksp "ru.kontur.mobile.visualfsm:visualfsm-compiler:$visualfsmVersion"
+
+    // Classes for easy getting generated code
+    implementation "ru.kontur.mobile.visualfsm:visualfsm-providers:$visualfsmVersion"
+
+    implementation "io.reactivex.rxjava3:rxjava:$rxJava3Version"
+
+    testImplementation "org.jetbrains.kotlin:kotlin-test"
+    testImplementation "ru.kontur.mobile.visualfsm:visualfsm-tools:$visualfsmVersion"
+}
+
+kotlin {
+    sourceSets {
+        main.kotlin.srcDirs += 'build/generated/ksp/main/kotlin'
+        test.kotlin.srcDirs += 'build/generated/ksp/test/kotlin'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = '1.8'
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = '1.8'
+}
+
+application {
+    mainClassName = 'MainKt'
+}

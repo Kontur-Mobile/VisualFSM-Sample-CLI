@@ -1,0 +1,30 @@
+buildscript {
+    ext {
+        kotlinVersion = '1.7.10'
+    }
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
+
+subprojects {
+    ext {
+        visualfsmVersion = '1.1.1'
+        coroutinesVersion = '1.6.4'
+        rxJava3Version = '3.1.5'
+        junitJupiterVersion = '5.8.2'
+        kspVersion = '1.7.10-1.0.6'
+        kotlinCompileTestingVersion = '1.4.9'
+    }
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
